@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pestañas con HTML Externo</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #2c3e50;
+      padding: 1rem;
+	  padding-left: 5%;
+      text-align: left;
+      color: white;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      background: #ecf0f1;
+      border-bottom: 1px solid #ccc;
+      justify-content: center;
+    }
+
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 1rem;
+      cursor: pointer;
+      background: #ecf0f1;
+      transition: background 0.3s;
+    }
+
+    .tab.active {
+      background: #ffffff;
+      font-weight: bold;
+      border-bottom: 2px solid #3498db;
+    }
+
+    .content {
+      padding: 2rem;
+      background: white;
+    }
+
+    @media (max-width: 600px) {
+      .tab {
+        flex: 0 0 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Arquitectura Óptima para Proyectos Full-Stack <br>
+		con FastAPI: Estructura y Mejores Prácticas</h1>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-url="pages/tab1.html">Agente 1</div>
+    <div class="tab" data-url="pages/tab2.html">Agente 2</div>
+    <div class="tab" data-url="pages/tab3.html">Agente 3</div>
+    <div class="tab" data-url="pages/tab4.html">Agente 4</div>
+    <div class="tab" data-url="pages/tab5.html">Agente 5</div>
+    <div class="tab" data-url="pages/tab6.html">Agente 6</div>
+  </div>
+
+  <div class="content" id="content">
+    <p>Selecciona una pestaña para cargar contenido externo.</p>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const content = document.getElementById('content');
+
+    function loadTab(tabElement) {
+      const url = tabElement.getAttribute('data-url');
+
+      // Quitar clase active
+      tabs.forEach(t => t.classList.remove('active'));
+      tabElement.classList.add('active');
+
+      // Cargar HTML externo
+      fetch(url)
+        .then(response => {
+          if (!response.ok) throw new Error("Archivo no encontrado");
+          return response.text();
+        })
+        .then(html => {
+          content.innerHTML = html;
+        })
+        .catch(err => {
+          content.innerHTML = `<p>Error cargando el contenido: ${err.message}</p>`;
+        });
+    }
+
+    // Evento click en pestañas
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        loadTab(tab);
+      });
+    });
+
+    // Cargar la primera pestaña al inicio
+    loadTab(tabs[0]);
+  </script>
+
+</body>
+</html>
