@@ -123,30 +123,19 @@
 </li>
 </ol>
 <h3><strong>Estructura de proyecto recomendada</strong></h3>
-<pre><code>
-project_root/
-
+<p>  Aquí tienes la estructura del proyecto <strong>solo como árbol visual</strong>, sin explicaciones:</p>
+<pre><code>project_root/
 ├── app/
-
-│ ├── models/ # Modelos de base de datos (SQLAlchemy, Pydantic)
-
-│ ├── schemas/ # Esquemas de validación (Pydantic)
-
-│ ├── routes/ # Rutas API (divididas por módulos)
-
-│ ├── services/ # Lógica de negocio reutilizable
-
-│ ├── core/ # Configuración global (variables, JWT, etc.)
-
-│ └── main.py # Archivo principal de FastAPI
-
-├── alembic/ # Migraciones de base de datos
-
-├── frontend/ # Carpeta para frontend (React, Vue, etc.)
-
-├── tests/ # Pruebas unitarias e integración
-
-└── requirements.txt # Dependencias
+│   ├── models/
+│   ├── schemas/
+│   ├── routes/
+│   ├── services/
+│   ├── core/
+│   └── main.py
+├── alembic/
+├── frontend/
+├── tests/
+└── requirements.txt
 </code></pre>
 <ul>
 <li><p><strong>Ventajas</strong>: Claridad, separación de responsabilidades y facilidad para escalar .</p>
